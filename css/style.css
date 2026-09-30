@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+@theme {
+  --color-verde-profundo: #002500;
+  --color-verde-floresta: #00510b;
+  --color-verde-cortinado: #04611c;
+  --color-bege: #d9c9b4;
+  --color-cinza: #e8e8e8;
+  --color-creme: #f5f0e8;
+  --color-texto: #1a1a1a;
+  --color-texto-suave: #55554e;
+
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Montserrat", system-ui, sans-serif;
+}
+
+/* Estilos personalizados / Regras globais */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+:focus-visible {
+  outline: 2px solid #04611c;
+  outline-offset: 3px;
+}
+
+/* Revelar ao rolar */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.visivel {
+  opacity: 1;
+  transform: none;
+}
+
+/* Entrada do hero */
+@keyframes subir {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-in {
+  opacity: 0;
+  animation: subir 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-in.d1 {
+  animation-delay: 0.5s;
+}
+
+.hero-in.d2 {
+  animation-delay: 0.9s;
+}
+
+/* Modal (<dialog>) */
+dialog#modal {
+  margin: auto;
+  max-width: 56rem;
+  width: calc(100% - 1.5rem);
+  max-height: 92svh;
+  padding: 0;
+  border: 0;
+  background: #f5f0e8;
+  overflow-y: auto;
+}
+
+dialog#modal::backdrop {
+  background: rgba(0, 37, 0, 0.7);
+  backdrop-filter: blur(3px);
+}
+
+dialog#modal[open] {
+  animation: subir 0.4s ease both;
+}
+
+/* Menu mobile */
+#menu-mobile {
+  transform: translateX(100%);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  visibility: hidden;
+}
+
+#menu-mobile.aberto {
+  transform: none;
+  visibility: visible;
+}
+
+.fundo-padrao {
+  background-image: url(../assets/images/img-07.png);
+  background-size: cover;
+}
+
+/* Acessibilidade - Animações reduzidas */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal,
+  .hero-in {
+    opacity: 1;
+    transform: none;
+  }
+}
